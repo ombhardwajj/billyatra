@@ -3,6 +3,7 @@ import { router as userRouter } from './routers/users.ts';
 import { router as tagRouter } from './routers/tags.ts';
 import { router as expenseRouter } from './routers/expenses.ts';
 import mongoose from 'mongoose';
+import cors from 'cors'
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -15,6 +16,7 @@ if (!MONGODB_URI) {
 await mongoose.connect(MONGODB_URI)
 const app = express();
 app.use(json())
+app.use(cors({origin:"*"}))
 
 app.use('/user', userRouter)
 app.use('/expense', expenseRouter)
